@@ -19,7 +19,7 @@ public class Player extends JLabel implements Moveable {
     private boolean up;
     private boolean down;
 
-    // 벽에 충한한 상태
+    // 벽에 충돌한 상태
     private boolean leftWallCrash;
     private boolean rightWallCrash;
 

@@ -9,6 +9,9 @@ import java.io.IOException;
 // 백그라운드에서 계속 관찰
 public class BackgroundPlayerService implements Runnable {
 
+    // 플레이어 이미지 사이즈
+    private final static int PLAYER_IMAGE_SIZE = 50;
+
     private BufferedImage image;
     private Player player;
 
@@ -24,11 +27,12 @@ public class BackgroundPlayerService implements Runnable {
     @Override
     public void run() {
         while (true) {
+            System.out.println(player.getX() + " , " + player.getY());
             Color leftColor = new Color(image.getRGB(player.getX() - 10, player.getY() + 25));
-            Color rightColor = new Color(image.getRGB(player.getX() + 50 + 10, player.getY() + 25));
-            // -2는 왼쪽 오른쪽 둘다 흰색이라는 의미
-            int bottomColor = image.getRGB(player.getX() + 10, player.getY() + 50 + 5)
-                    + image.getRGB(player.getX() + 50 - 10, player.getY() + 50 + 5);
+            Color rightColor = new Color(image.getRGB(player.getX() + PLAYER_IMAGE_SIZE + 10, player.getY() + 25));
+            // -2는 왼쪽 오른쪽 둘다 흰색이라는 의미 (-1이 흰색)
+            int bottomColor = image.getRGB(player.getX() + 10, player.getY() + PLAYER_IMAGE_SIZE + 5)
+                    + image.getRGB(player.getX() + PLAYER_IMAGE_SIZE - 10, player.getY() + PLAYER_IMAGE_SIZE + 5);
 //            System.out.println("leftColor 색상 : " + leftColor);
 //            System.out.println("rightColor 색상 : " + rightColor);
 //            System.out.println("bottomColor 색상 : " + bottomColor);
@@ -37,7 +41,7 @@ public class BackgroundPlayerService implements Runnable {
             if (bottomColor != -2) {
 //                System.out.println("바닥에 충돌");
                 player.setDown(false);
-                // 바닥이 낭떨어지지 이면
+                // 바닥이 낭떨어지이면
             } else {
                 // 위로 올라가고 내려가는 상태가 아닌경우
                 if (!player.isUp() && !player.isDown()) {

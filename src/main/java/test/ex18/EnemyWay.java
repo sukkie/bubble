@@ -1,0 +1,5 @@
+package test.ex18;
+
+public enum EnemyWay {
+    LEFT, RIGHT;
+}
